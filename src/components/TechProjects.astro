@@ -1,0 +1,268 @@
+---
+---
+
+<section id="tecnologia" class="tech">
+  <div class="tech__grid">
+    <div class="tech__col tech__col--image">
+      <div class="tech__parallax" data-parallax>
+        <img
+          src="/media/brazo-robotico.jpg"
+          alt="Brazo robótico realizando soldadura láser de precisión sobre una pieza metálica"
+          loading="lazy"
+        />
+      </div>
+      <div class="tech__col-tag">
+        <span class="eyebrow">Planta 01</span>
+        <p>Soldadura láser automatizada</p>
+      </div>
+    </div>
+
+    <div class="tech__col tech__col--data">
+      <div class="tech__data-inner">
+        <p class="eyebrow">Simulación de ingeniería</p>
+        <h2 class="tech__title">Cada pieza, verificada antes de salir de planta</h2>
+        <p class="tech__desc">
+          Corremos simulación dimensional y control de tolerancias en cada lote de producción,
+          integrando inspección óptica y metrología de contacto para garantizar consistencia
+          pieza a pieza.
+        </p>
+
+        <div class="tech__readout" id="tech-readout">
+          <div class="tech__readout-row">
+            <span>Ø NOMINAL</span>
+            <strong data-readout data-min="8.000" data-max="24.000">12.000</strong>
+            <span class="tech__unit">mm</span>
+          </div>
+          <div class="tech__readout-row">
+            <span>TOLERANCIA</span>
+            <strong data-readout data-min="0.002" data-max="0.020">0.005</strong>
+            <span class="tech__unit">± mm</span>
+          </div>
+          <div class="tech__readout-row">
+            <span>RUGOSIDAD</span>
+            <strong data-readout data-min="0.4" data-max="3.2">1.6</strong>
+            <span class="tech__unit">Ra μm</span>
+          </div>
+          <div class="tech__scanline" aria-hidden="true"></div>
+        </div>
+
+        <a href="#proyectos" class="btn btn--ghost tech__cta">Ver proyectos ejecutados</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="proyectos" class="tech__strip">
+    <div class="tech__strip-media" data-parallax-slow>
+      <video autoplay muted loop playsinline>
+        <source src="/media/simulacion-cnc.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="tech__strip-overlay">
+      <p class="eyebrow">Proyectos recientes</p>
+      <h3>Mecanizado CNC de 5 ejes para líneas de sellado hidráulico</h3>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tech {
+    background: var(--c-surface);
+    border-top: 1px solid var(--line);
+    padding-block: 0;
+  }
+
+  .tech__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 640px;
+  }
+
+  .tech__col { position: relative; overflow: hidden; }
+
+  .tech__col--image { background: var(--c-black); }
+
+  .tech__parallax {
+    position: absolute;
+    inset: -10% 0;
+    will-change: transform;
+  }
+
+  .tech__parallax img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.3) contrast(1.05);
+  }
+
+  .tech__col-tag {
+    position: absolute;
+    left: var(--gutter);
+    bottom: 2rem;
+    z-index: 1;
+  }
+
+  .tech__col-tag p {
+    margin-top: 0.5rem;
+    color: var(--c-white);
+    font-family: var(--f-mono);
+    font-size: 0.85rem;
+  }
+
+  .tech__col--data {
+    display: flex;
+    align-items: center;
+    background: var(--c-black);
+  }
+
+  .tech__data-inner {
+    padding: 4rem clamp(1.5rem, 4vw, 4rem);
+    max-width: 620px;
+  }
+
+  .tech__title {
+    margin-top: 1rem;
+    font-size: clamp(1.7rem, 3vw, 2.5rem);
+  }
+
+  .tech__desc {
+    margin-top: 1.1rem;
+    font-size: 1rem;
+  }
+
+  .tech__readout {
+    position: relative;
+    margin-top: 2.2rem;
+    border: 1px solid var(--line-strong);
+    background: var(--c-surface);
+    padding: 1.4rem 1.6rem;
+    overflow: hidden;
+  }
+
+  .tech__readout-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: baseline;
+    gap: 0.8rem;
+    padding-block: 0.55rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--f-mono);
+  }
+
+  .tech__readout-row:last-of-type { border-bottom: none; }
+
+  .tech__readout-row span:first-child {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--c-gray);
+  }
+
+  .tech__readout-row strong {
+    font-size: 1.25rem;
+    color: var(--c-red);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+
+  .tech__unit { font-size: 0.7rem; color: var(--c-gray); }
+
+  .tech__scanline {
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--red-glow), transparent);
+    animation: scan 3.6s linear infinite;
+  }
+
+  @keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+  }
+
+  .tech__cta { margin-top: 2rem; }
+
+  .tech__strip {
+    position: relative;
+    height: 56vh;
+    min-height: 380px;
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+  }
+
+  .tech__strip-media {
+    position: absolute;
+    inset: -12% 0;
+    will-change: transform;
+  }
+
+  .tech__strip-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.4) brightness(0.65);
+  }
+
+  .tech__strip-overlay {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    background: linear-gradient(to top, var(--c-black) 5%, transparent 55%);
+  }
+
+  .tech__strip-overlay h3 {
+    margin-top: 0.7rem;
+    max-width: 32ch;
+    font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  }
+
+  @media (max-width: 900px) {
+    .tech__grid { grid-template-columns: 1fr; }
+    .tech__col--image { height: 340px; }
+  }
+</style>
+
+<script>
+  // Parallax suave — lectura directa de scroll, sin dependencias externas.
+  const layers = document.querySelectorAll<HTMLElement>('[data-parallax], [data-parallax-slow]');
+
+  let ticking = false;
+  const update = () => {
+    for (const layer of layers) {
+      const rect = layer.parentElement!.getBoundingClientRect();
+      const speed = layer.hasAttribute('data-parallax-slow') ? 0.12 : 0.2;
+      const offset = (rect.top - window.innerHeight / 2) * speed;
+      layer.style.transform = `translate3d(0, ${offset * -1}px, 0)`;
+    }
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  };
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  }
+
+  // Readout tipo instrumento de medición: fluctúa dentro de rango real.
+  const readouts = document.querySelectorAll<HTMLElement>('[data-readout]');
+  readouts.forEach((el) => {
+    const min = parseFloat(el.dataset.min || '0');
+    const max = parseFloat(el.dataset.max || '1');
+    const base = parseFloat(el.textContent || '0');
+    const decimals = (el.textContent || '').split('.')[1]?.length ?? 2;
+
+    setInterval(() => {
+      const jitter = base + (Math.random() - 0.5) * (max - min) * 0.04;
+      el.textContent = jitter.toFixed(decimals);
+    }, 1800);
+  });
+</script>

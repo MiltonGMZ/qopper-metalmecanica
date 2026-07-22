@@ -1,0 +1,209 @@
+/* ==========================================================================
+   QOPPER S.A.S — Design tokens
+   Paleta estricta: Rojo #E03E3E · Blanco #FFFFFF · Gris #999999 · Negro #0A0A0A
+   Tipografía: Chakra Petch (display, técnica/angular) + Inter (texto)
+   + JetBrains Mono (datos, tolerancias, contadores)
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Chakra Petch';
+  src: local('Chakra Petch');
+}
+
+:root {
+  /* Paleta base — NO alterar estos 4 valores */
+  --c-black: #0A0A0A;
+  --c-white: #FFFFFF;
+  --c-gray: #999999;
+  --c-red: #E03E3E;
+
+  /* Derivados de opacidad (mismos 4 colores, distinta alpha) */
+  --c-black-85: rgba(10, 10, 10, 0.85);
+  --c-black-70: rgba(10, 10, 10, 0.7);
+  --c-black-40: rgba(10, 10, 10, 0.4);
+  --c-surface: #111111;
+  --c-surface-raised: #161616;
+  --line: rgba(153, 153, 153, 0.22);
+  --line-strong: rgba(153, 153, 153, 0.4);
+  --red-glow: rgba(224, 62, 62, 0.45);
+  --red-dim: rgba(224, 62, 62, 0.12);
+  --white-dim: rgba(255, 255, 255, 0.6);
+  --white-faint: rgba(255, 255, 255, 0.08);
+
+  /* Tipografía */
+  --f-display: 'Chakra Petch', 'Space Grotesk', 'Arial Narrow', sans-serif;
+  --f-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --f-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Ritmo / layout */
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --section-y: clamp(4.5rem, 10vw, 8rem);
+  --radius: 2px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--c-black);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--c-black);
+  color: var(--c-white);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+p { margin: 0; color: var(--c-gray); }
+
+a { color: inherit; text-decoration: none; }
+
+img, video { display: block; max-width: 100%; }
+
+::selection { background: var(--c-red); color: var(--c-white); }
+
+/* Focus visibility — accesibilidad, no decorativo */
+:focus-visible {
+  outline: 2px solid var(--c-red);
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-red);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--c-red);
+}
+
+/* ---- Regla graduada: elemento de firma del sistema (ver Nav/Hero/Dividers) ----
+   Simula la escala de un pie de rey / cinta métrica industrial: cada tramo
+   representa una unidad de medida, coherente con el negocio real (tolerancias
+   en mm/inch de arandelas y retenedores). Se usa como separador estructural,
+   no como decoración gratuita. */
+.ruler {
+  display: flex;
+  align-items: flex-end;
+  height: 14px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ruler span {
+  flex: 1 0 auto;
+  width: 1px;
+  min-width: 1px;
+  height: 5px;
+  background: var(--line-strong);
+}
+
+.ruler span:nth-child(5n) { height: 10px; background: var(--c-gray); }
+.ruler span:nth-child(10n) { height: 14px; background: var(--c-red); }
+
+/* Botón / CTA */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 1.75rem;
+  border: 1px solid var(--c-red);
+  color: var(--c-white);
+  background: var(--c-red);
+  isolation: isolate;
+  overflow: hidden;
+  transition: color 0.4s var(--ease), box-shadow 0.4s var(--ease), transform 0.2s var(--ease);
+}
+
+.btn:hover, .btn:focus-visible {
+  box-shadow: 0 0 0 1px var(--c-red), 0 0 32px 4px var(--red-glow);
+  transform: translateY(-2px);
+}
+
+.btn:active { transform: translateY(0); }
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--c-white);
+}
+
+.btn--ghost:hover, .btn--ghost:focus-visible {
+  border-color: var(--c-red);
+  box-shadow: 0 0 0 1px var(--c-red);
+}
+
+/* Utilidades de reveal (usadas por IntersectionObserver, script global) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.reveal-stagger.is-visible > * { opacity: 1; transform: translateY(0); }
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.16s; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.27s; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.38s; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.49s; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.6s; }
+
+section { position: relative; padding-block: var(--section-y); }

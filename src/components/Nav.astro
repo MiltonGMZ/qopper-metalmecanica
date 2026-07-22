@@ -1,0 +1,245 @@
+---
+const links = [
+  { label: 'Soluciones', href: '#soluciones' },
+  { label: 'Tecnología', href: '#tecnologia' },
+  { label: 'Proyectos', href: '#proyectos' },
+  { label: 'Contacto', href: '#contacto' },
+];
+---
+
+<header class="nav" id="site-nav">
+  <div class="nav__inner container">
+    <a href="#top" class="nav__logo" aria-label="Qopper S.A.S — inicio">
+      <span class="nav__logo-mark">Q</span>
+      <span class="nav__logo-text">QOPPER<span class="nav__logo-suffix">S.A.S</span></span>
+    </a>
+
+    <nav class="nav__links" aria-label="Navegación principal">
+      {links.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+
+    <div class="nav__contact">
+      <a href="tel:+573143117571" class="nav__phone">
+        <span class="nav__dot" aria-hidden="true"></span>
+        +57 314 311 7571
+      </a>
+      <a href="#contacto" class="btn nav__cta">Cotizar</a>
+    </div>
+
+    <button class="nav__burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-mobile">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="nav-mobile">
+    {links.map((link) => (
+      <a href={link.href}>{link.label}</a>
+    ))}
+    <a href="#contacto" class="btn">Cotizar</a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 100;
+    padding-block: 1.4rem;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background 0.5s var(--ease), border-color 0.5s var(--ease), padding 0.4s var(--ease);
+  }
+
+  .nav.is-scrolled {
+    padding-block: 0.85rem;
+    background: var(--c-black-70);
+    border-bottom-color: var(--line);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  .nav__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .nav__logo-mark {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    font-family: var(--f-display);
+    font-weight: 700;
+    color: var(--c-black);
+    background: var(--c-red);
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 100%, 0 100%);
+  }
+
+  .nav__logo-text {
+    font-family: var(--f-display);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    font-size: 0.95rem;
+  }
+
+  .nav__logo-suffix {
+    color: var(--c-red);
+    margin-left: 0.35em;
+    font-size: 0.85em;
+  }
+
+  .nav__links {
+    justify-self: center;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .nav__links a {
+    position: relative;
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    padding-block: 0.3rem;
+    transition: color 0.3s var(--ease);
+  }
+
+  .nav__links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: var(--c-red);
+    transition: width 0.35s var(--ease);
+  }
+
+  .nav__links a:hover,
+  .nav__links a:focus-visible {
+    color: var(--c-white);
+  }
+
+  .nav__links a:hover::after,
+  .nav__links a:focus-visible::after {
+    width: 100%;
+  }
+
+  .nav__contact {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-self: end;
+  }
+
+  .nav__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    color: var(--c-gray);
+  }
+
+  .nav__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-red);
+    box-shadow: 0 0 8px 1px var(--red-glow);
+    animation: pulse-dot 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  .nav__cta {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.72rem;
+  }
+
+  .nav__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    justify-self: end;
+  }
+
+  .nav__burger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--c-white);
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+
+  .nav__mobile {
+    display: none;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem var(--gutter) 2rem;
+    background: var(--c-black-85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav__mobile a {
+    font-family: var(--f-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-white);
+  }
+
+  .nav__mobile.is-open { display: flex; }
+
+  @media (max-width: 880px) {
+    .nav__links, .nav__contact { display: none; }
+    .nav__burger { display: flex; }
+    .nav__inner { grid-template-columns: auto auto; justify-content: space-between; }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('site-nav');
+  const onScroll = () => {
+    if (!nav) return;
+    nav.classList.toggle('is-scrolled', window.scrollY > 24);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const burger = document.getElementById('nav-burger');
+  const mobile = document.getElementById('nav-mobile');
+  burger?.addEventListener('click', () => {
+    const open = mobile?.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded', String(!!open));
+  });
+
+  mobile?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => {
+      mobile.classList.remove('is-open');
+      burger?.setAttribute('aria-expanded', 'false');
+    })
+  );
+</script>

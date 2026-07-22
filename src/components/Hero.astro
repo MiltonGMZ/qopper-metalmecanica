@@ -1,0 +1,296 @@
+---
+const stats = [
+  { value: '1200', suffix: '+', label: 'Piezas entregadas / mes' },
+  { value: '0.005', suffix: 'mm', label: 'Tolerancia mínima' },
+  { value: '18', suffix: 'años', label: 'En el sector' },
+];
+---
+
+<section class="hero" id="top">
+  <div class="hero__media" aria-hidden="true">
+    <video autoplay muted loop playsinline poster="/hero-poster.jpg">
+      <source src="/media/cnc-loop.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__grid"></div>
+    <div class="hero__vignette"></div>
+  </div>
+
+  <div class="hero__content container">
+    <p class="eyebrow hero__eyebrow" data-glitch>SISTEMA DE MANUFACTURA · TOLERANCIA CERTIFICADA</p>
+
+    <h1 class="hero__title">
+      <span class="hero__line" data-glitch>INGENIERÍA DE</span>
+      <span class="hero__line hero__line--red" data-glitch>PRECISIÓN</span>
+      <span class="hero__line hero__line--sub" data-glitch>SOLUCIONES METALMECÁNICAS A MEDIDA</span>
+    </h1>
+
+    <p class="hero__desc">
+      Diseñamos, mecanizamos y certificamos componentes de precisión —arandelas, retenedores
+      hidráulicos, tapones y repuestos técnicos— con control dimensional estricto en cada lote.
+    </p>
+
+    <div class="hero__actions">
+      <a href="#contacto" class="btn">
+        Solicitar cotización
+        <span class="btn__arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="#soluciones" class="btn btn--ghost">Ver soluciones</a>
+    </div>
+
+    <div class="ruler hero__ruler" aria-hidden="true">
+      {Array.from({ length: 64 }).map(() => <span></span>)}
+    </div>
+
+    <dl class="hero__stats">
+      {stats.map((s) => (
+        <div class="hero__stat">
+          <dt class="hero__stat-value" data-counter data-target={s.value} data-suffix={s.suffix}>
+            0{s.suffix}
+          </dt>
+          <dd>{s.label}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+
+  <a href="#soluciones" class="hero__scroll" aria-label="Ir a soluciones">
+    <span></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 6rem;
+    overflow: hidden;
+    background: var(--c-black);
+  }
+
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero__media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.42;
+    filter: grayscale(0.35) contrast(1.15);
+  }
+
+  .hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(153, 153, 153, 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(153, 153, 153, 0.12) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 90%);
+  }
+
+  .hero__vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 30%, transparent 0%, var(--c-black) 92%),
+      linear-gradient(to bottom, var(--c-black-40) 0%, transparent 20%, transparent 60%, var(--c-black) 100%);
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__eyebrow {
+    opacity: 0;
+    animation: hero-in 0.7s var(--ease) 0.1s forwards;
+  }
+
+  .hero__title {
+    margin-top: 1.4rem;
+    font-size: clamp(2.6rem, 7.2vw, 6.4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.05em;
+  }
+
+  .hero__line {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: hero-in 0.8s var(--ease) forwards;
+  }
+
+  .hero__line:nth-child(1) { animation-delay: 0.22s; }
+  .hero__line:nth-child(2) { animation-delay: 0.36s; }
+  .hero__line:nth-child(3) { animation-delay: 0.5s; }
+
+  .hero__line--red { color: var(--c-red); }
+
+  .hero__line--sub {
+    font-family: var(--f-body);
+    text-transform: none;
+    font-weight: 500;
+    font-size: 0.26em;
+    letter-spacing: 0.02em;
+    color: var(--c-white);
+    margin-top: 0.3em;
+  }
+
+  @keyframes hero-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Glitch sutil una sola vez al cargar */
+  [data-glitch] {
+    position: relative;
+  }
+
+  [data-glitch]::before {
+    content: attr(data-glitch-text);
+  }
+
+  .hero.is-loaded [data-glitch] {
+    animation-name: hero-in, glitch-flicker;
+    animation-duration: 0.8s, 0.5s;
+    animation-timing-function: var(--ease), steps(1);
+    animation-fill-mode: forwards, forwards;
+  }
+
+  @keyframes glitch-flicker {
+    0% { filter: none; }
+    8% { filter: brightness(2) blur(0.5px); transform: translateX(-2px); }
+    16% { filter: none; transform: none; }
+    24% { filter: brightness(1.6); transform: translateX(2px); }
+    32% { filter: none; transform: none; }
+    100% { filter: none; transform: none; }
+  }
+
+  .hero__desc {
+    margin-top: 1.6rem;
+    max-width: 46ch;
+    font-size: 1.05rem;
+    color: var(--c-gray);
+    opacity: 0;
+    animation: hero-in 0.8s var(--ease) 0.62s forwards;
+  }
+
+  .hero__actions {
+    margin-top: 2.2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: hero-in 0.8s var(--ease) 0.74s forwards;
+  }
+
+  .btn__arrow {
+    transition: transform 0.3s var(--ease);
+  }
+
+  .btn:hover .btn__arrow { transform: translateX(4px); }
+
+  .hero__ruler {
+    margin-top: 3.2rem;
+    max-width: 640px;
+    opacity: 0;
+    animation: hero-in 0.8s var(--ease) 0.86s forwards;
+  }
+
+  .hero__stats {
+    margin: 1.4rem 0 0;
+    display: flex;
+    gap: clamp(1.75rem, 5vw, 4rem);
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: hero-in 0.8s var(--ease) 0.98s forwards;
+  }
+
+  .hero__stat-value {
+    font-family: var(--f-mono);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    color: var(--c-white);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero__stat dd {
+    margin-top: 0.3rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--c-gray);
+    text-transform: uppercase;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 2.2rem;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 36px;
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    z-index: 1;
+  }
+
+  .hero__scroll span {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 3px;
+    height: 6px;
+    background: var(--c-red);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    animation: scroll-dot 1.8s ease-in-out infinite;
+  }
+
+  @keyframes scroll-dot {
+    0% { opacity: 1; top: 6px; }
+    70% { opacity: 0; top: 18px; }
+    100% { opacity: 0; top: 6px; }
+  }
+
+  @media (max-width: 640px) {
+    .hero__stats { gap: 1.6rem; }
+  }
+</style>
+
+<script>
+  // Contador dinámico tipo lectura CNC — cuenta una vez al entrar en viewport.
+  const counters = document.querySelectorAll<HTMLElement>('[data-counter]');
+  const format = (n: number, target: string) =>
+    target.includes('.') ? n.toFixed(3) : Math.round(n).toString();
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const el = entry.target as HTMLElement;
+        const target = parseFloat(el.dataset.target || '0');
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const start = performance.now();
+
+        const tick = (now: number) => {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = `${format(target * eased, el.dataset.target || '0')}${suffix}`;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        io.unobserve(el);
+      }
+    },
+    { threshold: 0.6 }
+  );
+
+  counters.forEach((el) => io.observe(el));
+
+  document.querySelector('.hero')?.classList.add('is-loaded');
+</script>

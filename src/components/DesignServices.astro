@@ -1,0 +1,106 @@
+---
+const services = [
+  {
+    n: '01',
+    title: 'Diseño CAD a medida',
+    desc: 'Modelado paramétrico de la pieza a partir de plano, muestra física o especificación técnica del cliente.',
+  },
+  {
+    n: '02',
+    title: 'Prototipado rápido',
+    desc: 'Primera muestra mecanizada en menos de 72 horas para validación dimensional antes de producción en serie.',
+  },
+  {
+    n: '03',
+    title: 'Control de calidad',
+    desc: 'Inspección metrológica por lote con reporte de trazabilidad, certificado bajo estándar dimensional interno.',
+  },
+];
+---
+
+<section class="design">
+  <div class="container">
+    <header class="design__head reveal">
+      <p class="eyebrow">Del plano a la pieza</p>
+      <h2 class="design__title">Diseño y prototipado</h2>
+    </header>
+
+    <div class="design__grid reveal-stagger">
+      {services.map((s) => (
+        <article class="d-card">
+          <div class="d-card__badge">
+            <span>{s.n}</span>
+          </div>
+          <h3>{s.title}</h3>
+          <p>{s.desc}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .design {
+    background: var(--c-black);
+    border-top: 1px solid var(--line);
+  }
+
+  .design__head { text-align: center; margin-inline: auto; }
+
+  .design__title {
+    margin-top: 0.9rem;
+    font-size: clamp(2rem, 4.4vw, 3.2rem);
+  }
+
+  .design__grid {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .d-card {
+    text-align: center;
+    padding: 2.4rem 1.6rem;
+    border: 1px solid var(--line);
+    background: var(--c-surface);
+    transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+
+  .d-card:hover {
+    border-color: var(--red-dim);
+    transform: translateY(-6px);
+  }
+
+  .d-card__badge {
+    width: 56px;
+    height: 56px;
+    margin-inline: auto;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--c-red);
+    box-shadow: 0 0 0 6px var(--red-dim);
+  }
+
+  .d-card__badge span {
+    font-family: var(--f-mono);
+    font-weight: 500;
+    color: var(--c-black);
+  }
+
+  .d-card h3 {
+    margin-top: 1.4rem;
+    font-size: 1.1rem;
+    letter-spacing: 0;
+  }
+
+  .d-card p {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 800px) {
+    .design__grid { grid-template-columns: 1fr; }
+  }
+</style>

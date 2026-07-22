@@ -1,0 +1,224 @@
+---
+const solutions = [
+  {
+    code: 'ARN',
+    title: 'Arandelas de precisión',
+    material: 'Cobre · Aluminio',
+    desc: 'Línea completa en milímetros y pulgadas, espesores desde 1.0mm hasta 2mm, para sellado de inyectores y tapón de cárter.',
+    icon: 'ring',
+  },
+  {
+    code: 'RTH',
+    title: 'Retenedores hidráulicos',
+    material: 'NBR · Vitón',
+    desc: 'Sellos dinámicos fabricados bajo tolerancia certificada para sistemas hidráulicos de alta presión y exigencia continua.',
+    icon: 'seal',
+  },
+  {
+    code: 'TBM',
+    title: 'Tapones de bloque',
+    material: 'Acero · Aluminio',
+    desc: 'Componentes de cierre mecanizados a medida, con acabado superficial optimizado para resistencia a la corrosión.',
+    icon: 'plug',
+  },
+  {
+    code: 'RGM',
+    title: 'Repuestos técnicos',
+    material: 'Guadañas · Motosierras',
+    desc: 'Piezas de desgaste y repuesto para equipos de corte, fabricadas y verificadas bajo el mismo estándar dimensional.',
+    icon: 'blade',
+  },
+];
+---
+
+<section id="soluciones" class="solutions">
+  <div class="container">
+    <header class="solutions__head reveal">
+      <p class="eyebrow">Catálogo técnico</p>
+      <h2 class="solutions__title">Nuestras soluciones</h2>
+      <p class="solutions__desc">
+        Cuatro líneas de producto, un mismo estándar de control dimensional. Cada pieza sale de
+        planta con tolerancia verificada y trazabilidad de lote.
+      </p>
+    </header>
+
+    <div class="solutions__grid reveal-stagger">
+      {solutions.map((s) => (
+        <article class="s-card" tabindex="0">
+          <div class="s-card__top">
+            <span class="s-card__code">{s.code}—0{solutions.indexOf(s) + 1}</span>
+            <span class="s-card__icon" data-icon={s.icon} aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {s.icon === 'ring' && (
+                  <>
+                    <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2" />
+                    <circle cx="24" cy="24" r="7" stroke="currentColor" stroke-width="2" />
+                  </>
+                )}
+                {s.icon === 'seal' && (
+                  <>
+                    <rect x="10" y="14" width="28" height="20" rx="1" stroke="currentColor" stroke-width="2" />
+                    <path d="M10 24H4M44 24h-6" stroke="currentColor" stroke-width="2" />
+                    <path d="M18 14v20M30 14v20" stroke="currentColor" stroke-width="1.4" opacity="0.6" />
+                  </>
+                )}
+                {s.icon === 'plug' && (
+                  <>
+                    <path d="M24 6v10M14 12l5 6M34 12l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <rect x="12" y="18" width="24" height="22" rx="2" stroke="currentColor" stroke-width="2" />
+                    <path d="M18 28h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  </>
+                )}
+                {s.icon === 'blade' && (
+                  <>
+                    <path d="M6 24h30" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M36 24l6-6M36 24l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M6 24l6-8M6 24l6 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  </>
+                )}
+              </svg>
+            </span>
+          </div>
+
+          <h3 class="s-card__title">{s.title}</h3>
+          <p class="s-card__material">{s.material}</p>
+
+          <div class="s-card__reveal">
+            <p>{s.desc}</p>
+            <a href="#contacto" class="s-card__link">Ver ficha técnica →</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .solutions {
+    background: var(--c-black);
+    border-top: 1px solid var(--line);
+  }
+
+  .solutions__head {
+    max-width: 56ch;
+  }
+
+  .solutions__title {
+    margin-top: 0.9rem;
+    font-size: clamp(2rem, 4.4vw, 3.2rem);
+  }
+
+  .solutions__desc {
+    margin-top: 1.1rem;
+    font-size: 1.02rem;
+  }
+
+  .solutions__grid {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .s-card {
+    position: relative;
+    background: var(--c-surface);
+    padding: 2rem 1.6rem 2.2rem;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    transition: transform 0.5s var(--ease), background 0.5s var(--ease);
+    outline: none;
+  }
+
+  .s-card:hover,
+  .s-card:focus-visible {
+    background: var(--c-surface-raised);
+    transform: translateY(-8px);
+    z-index: 2;
+    box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.7), inset 0 0 0 1px var(--red-dim);
+  }
+
+  .s-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .s-card__code {
+    font-family: var(--f-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--c-gray);
+  }
+
+  .s-card__icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    color: var(--c-red);
+    transition: transform 0.6s var(--ease);
+  }
+
+  .s-card:hover .s-card__icon,
+  .s-card:focus-visible .s-card__icon {
+    transform: rotate(24deg) scale(1.08);
+  }
+
+  .s-card__icon svg { width: 26px; height: 26px; }
+
+  .s-card__title {
+    margin-top: 1.8rem;
+    font-size: 1.18rem;
+    letter-spacing: 0;
+  }
+
+  .s-card__material {
+    margin-top: 0.5rem;
+    font-family: var(--f-mono);
+    font-size: 0.74rem;
+    color: var(--c-gray);
+  }
+
+  .s-card__reveal {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.5s var(--ease), opacity 0.4s var(--ease), margin-top 0.5s var(--ease);
+  }
+
+  .s-card__reveal > p { overflow: hidden; }
+
+  .s-card:hover .s-card__reveal,
+  .s-card:focus-visible .s-card__reveal {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 1.1rem;
+  }
+
+  .s-card__reveal p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .s-card__link {
+    display: inline-block;
+    margin-top: 0.9rem;
+    font-family: var(--f-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.05em;
+    color: var(--c-red);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1000px) {
+    .solutions__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .solutions__grid { grid-template-columns: 1fr; }
+  }
+</style>
